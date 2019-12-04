@@ -1096,3 +1096,51 @@ VALUES(004,
         "Recebi o produto errado",
         007
        )
+
+-- Consulta do bando de dado
+
+-- Nomes dos clientes em ordem crescente, considerando as categorias de compras;
+SELECT nome, cpf_c, pagamento
+FROM cliente, compra
+WHERE(cpf=cpf_c)
+GROUP BY cpf_c 
+ORDER BY nome ASC
+
+--  O valor total pago por cada cliente e ofereça uma oferta para o cliente que mais comprou;
+SELECT cpf_c, Sum(valor_total)
+FROM compra
+GROUP BY cpf_c
+ORDER BY Sum(valor_total) DESC
+
+--Considerando o cpf de um cliente, identifique os produtos mais comprados e recomende outro, que ele ainda não tenha, mas que esteja na mesma categoria.
+SELECT cpf, id_produt
+FROM compra_produto
+ORDER BY cpf ASC
+
+-- Nomes dos produtos e seus respectivos valores (considerando no resultado primeiro o produto mais caro);
+Select nome, valor_venda
+From produto
+ORDER BY valor_venda DESC
+-- Folha salarial da empresa 
+SELECT SUM(salario)
+FROM funcionario
+
+
+-- Nome dos clientes em ordem alfabetica
+SELECT nome
+FROM cliente
+ORDER BY nome ASC
+
+--Soma de todas as compras
+SELECT SUM(valor_total)
+FROM compra
+
+-- Motivos que mais procuraram o transporte
+SELECT id_bilhete, motivo
+From suporte
+
+-- Produto com mais vendas
+SELECT id_produt, SUM(quantidade)
+FROM compra_produto
+GROUP BY id_produt ASC
+ORDER BY SUM(quantidade) DESC
